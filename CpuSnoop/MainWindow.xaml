@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CpuSnoop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel, IsDesignTimeCreatable=False}"
+        Title="CPU Snoop" Height="450" Width="800">
     <Grid>
+        <ListView Name="ProcessesList" Margin="5" HorizontalAlignment="Stretch" ItemsSource="{Binding Processes}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch" Width="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" SharedSizeGroup="A"/>
+                            <ColumnDefinition Width="300" SharedSizeGroup="B"/>
+                            <ColumnDefinition Width="50" SharedSizeGroup="C"/>
+                            <ColumnDefinition Width="50" SharedSizeGroup="D"/>
+                            <ColumnDefinition Width="50" SharedSizeGroup="E"/>
+                            <ColumnDefinition Width="*" SharedSizeGroup="F"/>
+                        </Grid.ColumnDefinitions>
 
+                        <TextBlock Grid.Column="0" Text="{Binding Id}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Name}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding ProcessorUsage, StringFormat=F2}"/>
+                        <TextBlock Grid.Column="3" Text="{Binding PeakUsage, StringFormat=F2}"/>
+                        <TextBlock Grid.Column="4" Text="{Binding Denied}"/>
+                        <TextBlock Grid.Column="5" Text="{Binding Path}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>
